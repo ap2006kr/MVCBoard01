@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVCBoard.Models;
+using Microsoft.AspNet.Identity;
 
 namespace MVCBoard
 {
@@ -48,8 +49,12 @@ namespace MVCBoard
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Title,Content,Created")] Board board)
         {
+            string currentUserId = User.Identity.GetUserId();
+            ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
+
             if (ModelState.IsValid)
             {
+                board.Creater = currentUser;
                 db.Boards.Add(board);
                 db.SaveChanges();
                 return RedirectToAction("Index");

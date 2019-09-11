@@ -200,6 +200,10 @@
     <Compile Include="Migrations\201909100912379_AddBoard03.Designer.cs">
       <DependentUpon>201909100912379_AddBoard03.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909110213436_CHGDateTime.cs" />
+    <Compile Include="Migrations\201909110213436_CHGDateTime.Designer.cs">
+      <DependentUpon>201909110213436_CHGDateTime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Board.cs" />
@@ -301,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909100912379_AddBoard03.resx">
       <DependentUpon>201909100912379_AddBoard03.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909110213436_CHGDateTime.resx">
+      <DependentUpon>201909110213436_CHGDateTime.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

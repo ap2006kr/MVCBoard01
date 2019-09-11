@@ -13,7 +13,7 @@ namespace MVCBoard.Models
         public string Content { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime Created { get; set; }
+        public DateTime? Created { get; set; }
         public ApplicationUser Creater { get; set; }
     }
 }
