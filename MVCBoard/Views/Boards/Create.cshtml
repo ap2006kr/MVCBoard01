@@ -57,7 +57,11 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 <script>
-    $('#summernote').summernote();
+    $('#summernote').summernote(
+        {
+            tabsize: 2,
+            height: 200
+        });
     $("#createform").submit(function () {
         var makupStr = $('#summernote').summernote('code');
         $("#Content").val(makupStr)
