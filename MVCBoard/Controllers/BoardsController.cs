@@ -47,6 +47,7 @@ namespace MVCBoard
         // 자세한 내용은 https://go.microsoft.com/fwlink/?LinkId=317598을(를) 참조하십시오.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AcceptVerbs(HttpVerbs.Post),ValidateInput(false)]
         public ActionResult Create([Bind(Include = "ID,Title,Content,Created")] Board board)
         {
             string currentUserId = User.Identity.GetUserId();
