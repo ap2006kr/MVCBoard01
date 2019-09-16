@@ -13,7 +13,17 @@ namespace MVCBoard.Models
         public string Content { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime? Created { get; set; }
+        public DateTime? CreatedTime { get; set; }
         public ApplicationUser Creater { get; set; }
+    }
+
+    public class Reply
+    {
+        public int Id { get; set; }
+        public ApplicationUser Replier { get; set; }
+        public string Content { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime? CreatedTime { get; set; }
+        public int BoardId { get; set; }
     }
 }

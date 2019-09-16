@@ -24,16 +24,28 @@ namespace MVCBoard
         // GET: Boards/Details/5
         public ActionResult Details(int? id)
         {
+          
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Board board = db.Boards.Find(id);
+         
             if (board == null)
             {
                 return HttpNotFound();
             }
-            return View(board);
+
+            var detailViewModel = new BoardViewModel()
+            {
+                Board = board,
+                Replies = db.Replies.Where(s => s.BoardId == board.ID).ToList(),
+                Reply = new Reply()
+                {
+                     BoardId = board.ID
+                }
+            };
+            return View(detailViewModel);
         }
 
         // GET: Boards/Create
@@ -57,6 +69,29 @@ namespace MVCBoard
             {
                 board.Creater = currentUser;
                 db.Boards.Add(board);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(board);
+        }
+
+        // POST: Boards/Create
+        // 초과 게시 공격으로부터 보호하려면 바인딩하려는 특정 속성을 사용하도록 설정하십시오. 
+        // 자세한 내용은 https://go.microsoft.com/fwlink/?LinkId=317598을(를) 참조하십시오.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AcceptVerbs(HttpVerbs.Post), ValidateInput(false)]
+        public ActionResult Details([Bind(Include = "Board,Replies,Reply")] BoardViewModel board)
+        {
+            string currentUserId = User.Identity.GetUserId();
+            ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
+
+            if (ModelState.IsValid)
+            {
+                board.Reply.Replier = currentUser;
+                db.Replies.Add(board.Reply);
+                
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

@@ -21,6 +21,7 @@ namespace MVCBoard.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Board> Boards { get; set; }
+        public DbSet<Reply> Replies { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

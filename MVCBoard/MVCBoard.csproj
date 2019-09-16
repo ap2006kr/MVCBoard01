@@ -204,9 +204,26 @@
     <Compile Include="Migrations\201909110213436_CHGDateTime.Designer.cs">
       <DependentUpon>201909110213436_CHGDateTime.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909160229468_addreplymodel.cs" />
+    <Compile Include="Migrations\201909160229468_addreplymodel.Designer.cs">
+      <DependentUpon>201909160229468_addreplymodel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909160240038_addreplymodel01.cs" />
+    <Compile Include="Migrations\201909160240038_addreplymodel01.Designer.cs">
+      <DependentUpon>201909160240038_addreplymodel01.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909160438413_changeModel.cs" />
+    <Compile Include="Migrations\201909160438413_changeModel.Designer.cs">
+      <DependentUpon>201909160438413_changeModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909160451028_addBoardId.cs" />
+    <Compile Include="Migrations\201909160451028_addBoardId.Designer.cs">
+      <DependentUpon>201909160451028_addBoardId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Board.cs" />
+    <Compile Include="Models\BoardViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -308,6 +325,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909110213436_CHGDateTime.resx">
       <DependentUpon>201909110213436_CHGDateTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909160229468_addreplymodel.resx">
+      <DependentUpon>201909160229468_addreplymodel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909160240038_addreplymodel01.resx">
+      <DependentUpon>201909160240038_addreplymodel01.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909160438413_changeModel.resx">
+      <DependentUpon>201909160438413_changeModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909160451028_addBoardId.resx">
+      <DependentUpon>201909160451028_addBoardId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
