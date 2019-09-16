@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MVCBoard.Models;
 using Microsoft.AspNet.Identity;
+using PagedList;
 
 namespace MVCBoard
 {
@@ -18,18 +19,29 @@ namespace MVCBoard
         // GET: Boards
         public ActionResult Index()
         {
-            return View(db.Boards.ToList());
+            var vm = new BoardKeyModel();     
+            var newListCategoryVm = new List<BoardKeyModel>() { vm };
+            return View(newListCategoryVm);
         }
 
         // GET: Boards by key
-        public ActionResult ViewIndex(string boardKey)
+        public ActionResult ViewIndex(string boardKey, int? page)
+
         {
-            var vm = new BoardKeyModel()
+            int pageSize = 6;
+            int pageNumber = page ?? 1;
+
+            var BKM = new BoardKeyModel()
             {
-                Boards = db.Boards.Where(c => c.BoardKey == boardKey).ToList(),
-                BoardKey = boardKey
+                Boards = db.Boards.Where(c => c.BoardKey == boardKey).ToList().ToPagedList(pageNumber, pageSize),
+                Board = new Board()
             };
-            return View("Index",vm);
+
+            ViewBag.BoardKey = boardKey;
+
+
+
+            return View("Index", BKM.Boards);
         }
 
         // GET: Boards/Details/5

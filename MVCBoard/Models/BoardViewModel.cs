@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +17,8 @@ namespace MVCBoard.Models
     {
         public string BoardKey { get; set; }
         public Board Board { get; set; }
-        public List<Board> Boards { get; set; }
+        public IPagedList<Board> Boards { get; set; }
     }
+
+   
 }

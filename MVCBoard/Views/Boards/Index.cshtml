@@ -1,4 +1,6 @@
-﻿@model MVCBoard.Models.BoardKeyModel
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<MVCBoard.Models.Board>
+
 
 @{
     ViewBag.Title = "Index";
@@ -8,44 +10,46 @@
 <h2>Index</h2>
 
 <p>
-    @Html.DisplayFor(model => model.BoardKey, new { htmlAttributes = new { @type = "hidden", @class = "form-control" } })
-    @Html.ActionLink("Create New", "Create", new { id = Model.BoardKey })
+    @Html.ActionLink("Create New", "Create", new { id = ViewBag.BoardKey })
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Board.Title)
+            @Html.DisplayNameFor(model => model.First().Title)
         </th>
-      
+
         <th>
-            @Html.DisplayNameFor(model => model.Board.CreatedTime)
+            @Html.DisplayNameFor(model => model.First().CreatedTime)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Board.Creater)
+            @Html.DisplayNameFor(model => model.First().Creater)
         </th>
         <th>
         </th>
     </tr>
 
-@foreach (var item in Model.Boards) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-       
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Creater.Email)
-        </td>
-        <td>
-           
-            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Creater.Email)
+            </td>
+            <td>
+
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>
+@Html.PagedListPager(Model, Page => Url.Action("ViewIndex", new {boardKey = ViewBag.BoardKey,page = Page }))
+
