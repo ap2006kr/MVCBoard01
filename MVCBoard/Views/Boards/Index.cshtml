@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MVCBoard.Models.Board>
+﻿@model MVCBoard.Models.BoardKeyModel
 
 @{
     ViewBag.Title = "Index";
@@ -8,25 +8,26 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.DisplayFor(model => model.BoardKey, new { htmlAttributes = new { @type = "hidden", @class = "form-control" } })
+    @Html.ActionLink("Create New", "Create", new { id = Model.BoardKey })
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayNameFor(model => model.Board.Title)
         </th>
       
         <th>
-            @Html.DisplayNameFor(model => model.CreatedTime)
+            @Html.DisplayNameFor(model => model.Board.CreatedTime)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Creater)
+            @Html.DisplayNameFor(model => model.Board.Creater)
         </th>
         <th>
         </th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.Boards) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Title)
@@ -39,6 +40,7 @@
             @Html.DisplayFor(modelItem => item.Creater.Email)
         </td>
         <td>
+           
             @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
             @Html.ActionLink("Details", "Details", new { id = item.ID }) |
             @Html.ActionLink("Delete", "Delete", new { id = item.ID })

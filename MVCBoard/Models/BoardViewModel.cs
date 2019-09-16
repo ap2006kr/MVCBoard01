@@ -11,4 +11,11 @@ namespace MVCBoard.Models
         public List<Reply> Replies { get; set; }
         public Reply Reply { get; set; }
     }
+
+    public class BoardKeyModel
+    {
+        public string BoardKey { get; set; }
+        public Board Board { get; set; }
+        public List<Board> Boards { get; set; }
+    }
 }

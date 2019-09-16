@@ -220,6 +220,14 @@
     <Compile Include="Migrations\201909160451028_addBoardId.Designer.cs">
       <DependentUpon>201909160451028_addBoardId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909160721459_addBoardKey.cs" />
+    <Compile Include="Migrations\201909160721459_addBoardKey.Designer.cs">
+      <DependentUpon>201909160721459_addBoardKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909160949274_addBoardKeyOnReply.cs" />
+    <Compile Include="Migrations\201909160949274_addBoardKeyOnReply.Designer.cs">
+      <DependentUpon>201909160949274_addBoardKeyOnReply.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Board.cs" />
@@ -337,6 +345,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909160451028_addBoardId.resx">
       <DependentUpon>201909160451028_addBoardId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909160721459_addBoardKey.resx">
+      <DependentUpon>201909160721459_addBoardKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909160949274_addBoardKeyOnReply.resx">
+      <DependentUpon>201909160949274_addBoardKeyOnReply.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -21,6 +21,17 @@ namespace MVCBoard
             return View(db.Boards.ToList());
         }
 
+        // GET: Boards by key
+        public ActionResult ViewIndex(string boardKey)
+        {
+            var vm = new BoardKeyModel()
+            {
+                Boards = db.Boards.Where(c => c.BoardKey == boardKey).ToList(),
+                BoardKey = boardKey
+            };
+            return View("Index",vm);
+        }
+
         // GET: Boards/Details/5
         public ActionResult Details(int? id)
         {
@@ -42,16 +53,22 @@ namespace MVCBoard
                 Replies = db.Replies.Where(s => s.BoardId == board.ID).ToList(),
                 Reply = new Reply()
                 {
-                     BoardId = board.ID
+                     BoardId = board.ID,
+                     BoardKey = board.BoardKey
                 }
             };
             return View(detailViewModel);
         }
 
         // GET: Boards/Create
-        public ActionResult Create()
+        public ActionResult Create(string id)
         {
-            return View();
+            var b = new Board()
+            {
+                BoardKey = id
+
+            };
+            return View(b);
         }
 
         // POST: Boards/Create
@@ -60,20 +77,27 @@ namespace MVCBoard
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AcceptVerbs(HttpVerbs.Post),ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "ID,Title,Content,Created")] Board board)
+        public ActionResult Create([Bind(Include = "ID,Title,Content,CreatedTime,BoardKey")] Board board)
         {
             string currentUserId = User.Identity.GetUserId();
             ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
+
 
             if (ModelState.IsValid)
             {
                 board.Creater = currentUser;
                 db.Boards.Add(board);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+              
+                return RedirectToAction("ViewIndex","Boards", new { boardKey = board.BoardKey });
             }
 
-            return View(board);
+         
+
+            return View(new BoardViewModel() {
+                 Board = board
+            });
         }
 
         // POST: Boards/Create
@@ -93,7 +117,7 @@ namespace MVCBoard
                 db.Replies.Add(board.Reply);
                 
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ViewIndex", "Boards", new { boardKey  = board.Reply.BoardKey });
             }
 
             return View(board);
@@ -120,13 +144,13 @@ namespace MVCBoard
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AcceptVerbs(HttpVerbs.Post), ValidateInput(false)]
-        public ActionResult Edit([Bind(Include = "ID,Title,Content,Created")] Board board)
+        public ActionResult Edit([Bind(Include = "ID,Title,Content,CreatedTime,BoardKey")] Board board)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(board).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ViewIndex", "Boards", new { boardKey = board.BoardKey });
             }
             return View(board);
         }

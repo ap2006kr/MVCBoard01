@@ -6,6 +6,7 @@ using System.Web;
 
 namespace MVCBoard.Models
 {
+
     public class Board
     {
         public int ID { get; set; }
@@ -15,6 +16,8 @@ namespace MVCBoard.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? CreatedTime { get; set; }
         public ApplicationUser Creater { get; set; }
+
+        public string BoardKey { get; set; }
     }
 
     public class Reply
@@ -25,5 +28,6 @@ namespace MVCBoard.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? CreatedTime { get; set; }
         public int BoardId { get; set; }
+        public string BoardKey { get; set; }
     }
 }

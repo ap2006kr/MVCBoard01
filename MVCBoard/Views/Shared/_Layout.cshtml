@@ -24,7 +24,8 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("홈", "Index", "Home")</li>
                     <li>@Html.ActionLink("정보", "About", "Home")</li>
-                    <li>@Html.ActionLink("연락처", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("게시판A", "ViewIndex", "Boards", new { boardKey = "A" },null)</li>
+                    <li>@Html.ActionLink("게시판B", "ViewIndex", "Boards", new { boardKey = "B" },null)</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
