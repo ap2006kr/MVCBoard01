@@ -22,6 +22,7 @@ namespace MVCBoard.Models
     {
         public DbSet<Board> Boards { get; set; }
         public DbSet<Reply> Replies { get; set; }
+        public DbSet<PublicHoliday> PublicHolidays { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

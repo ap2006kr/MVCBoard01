@@ -22,9 +22,13 @@ namespace MVCBoard
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
+            // Custom Calendar.
+            bundles.Add(new ScriptBundle("~/bundles/Script-calendar").Include(
+                                 "~/Scripts/script-custom-calendar.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/Site.css"));
         }
     }
 }
