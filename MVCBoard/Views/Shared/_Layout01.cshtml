@@ -8,8 +8,8 @@
     <title>SB Admin - Dashboard</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")*@
     @Scripts.Render("~/bundles/theme01")
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
@@ -109,8 +109,13 @@
                     <span>게시판A</span>
                 </a>
             </li>
-
-
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index", "PublicHolidays" , null)">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Booking</span>
+                </a>
+            </li>
+            
             <li class="nav-item">
                 <a class="nav-link" href="tables.html">
                     <i class="fas fa-fw fa-table"></i>
@@ -167,7 +172,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="@Url.Action("Login", "Account" , null)">Logout</a>
                 </div>
             </div>
         </div>
