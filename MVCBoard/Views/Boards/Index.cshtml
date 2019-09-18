@@ -4,52 +4,58 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout01.cshtml";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create", new { id = ViewBag.BoardKey })
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.First().Title)
-        </th>
-
-        <th>
-            @Html.DisplayNameFor(model => model.First().CreatedTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().Creater)
-        </th>
-        <th>
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="card-header">
+    <i class="fas fa-chart-area"></i>
+    Board
+</div>
+<div class="card-body">
+    <p>
+        @Html.ActionLink("Create New", "Create", new { id = ViewBag.BoardKey })
+    </p>
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Title)
+            </th>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Creater.Email)
-            </td>
-            <td>
-
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.First().CreatedTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Creater)
+            </th>
+            <th>
+            </th>
         </tr>
-    }
 
-</table>
-@Html.PagedListPager(Model, Page => Url.Action("ViewIndex", new {boardKey = ViewBag.BoardKey,page = Page }))
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Creater.Email)
+                </td>
+                <td>
+
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+
+    </table>
+    @Html.PagedListPager(Model, Page => Url.Action("ViewIndex", new { boardKey = ViewBag.BoardKey, page = Page }))
+
+</div>
 

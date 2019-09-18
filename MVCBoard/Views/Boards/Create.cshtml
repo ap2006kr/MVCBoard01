@@ -2,69 +2,70 @@
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout01.cshtml";
 }
 
-<h2>Create</h2>
-
-
-@using (Html.BeginForm(null, null, new { @id = string.Empty }, FormMethod.Post,
-    new { @id = "createform" }))
-{
-    @Html.AntiForgeryToken()
-
-<div class="form-horizontal">
-    <h4>Board</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @type = "hidden", @class = "form-control" } })
-            <div id="summernote"></div>
-            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.CreatedTime, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.CreatedTime, new { htmlAttributes = new { @type = "hidden", @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.CreatedTime, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    @Html.EditorFor(model => model.BoardKey, new { htmlAttributes = new { @type = "hidden", @class = "form-control" } })
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
-        </div>
-    </div>
+<div class="card-header">
+    <i class="fas fa-chart-area"></i>
+    Create
 </div>
-}
+<div class="card-body">
+    @using (Html.BeginForm(null, null, new { @id = string.Empty }, FormMethod.Post,
+        new { @id = "createform" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <h4>Board</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @type = "hidden", @class = "form-control" } })
+                    <div id="summernote"></div>
+                    @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-<script>
-    $('#summernote').summernote(
-        {
-            tabsize: 2,
-            height: 200
-        });
-    $("#createform").submit(function () {
-        var makupStr = $('#summernote').summernote('code');
-        $("#Content").val(makupStr)
-    })
-</script>
-}
+            <div class="form-group">
+                @Html.LabelFor(model => model.CreatedTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CreatedTime, new { htmlAttributes = new { @type = "hidden", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CreatedTime, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @Html.EditorFor(model => model.BoardKey, new { htmlAttributes = new { @type = "hidden", @class = "form-control" } })
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script>
+            $('#summernote').summernote(
+                {
+                    tabsize: 2,
+                    height: 200
+                });
+            $("#createform").submit(function () {
+                var makupStr = $('#summernote').summernote('code');
+                $("#Content").val(makupStr)
+            })
+        </script>
+    }

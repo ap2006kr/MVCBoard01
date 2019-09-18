@@ -67,6 +67,6 @@
             });
         },
 
-        editable: true
+        editable: false
     });
 });
