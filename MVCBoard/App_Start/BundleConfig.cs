@@ -35,7 +35,7 @@ namespace MVCBoard
                 "~/Content/theme01/vendor/fontawesome-free/css/all.min.css",
                 "~/Content/theme01/vendor/datatables/dataTables.bootstrap4.css",
                 "~/Content/theme01/css/sb-admin.css", 
-                "~/Content/theme01/css/Site.css"
+                "~/Content/theme01/css/Site.css?13123"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/theme01").Include(

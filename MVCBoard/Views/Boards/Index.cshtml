@@ -16,46 +16,65 @@
     <p>
         @Html.ActionLink("Create New", "Create", new { id = ViewBag.BoardKey })
     </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Title)
-            </th>
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().Title)
+                    </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.First().CreatedTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Creater)
-            </th>
-            <th>
-            </th>
-        </tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().CreatedTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().Creater)
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().Title)
+                    </th>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().CreatedTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().Creater)
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Creater.Email)
-                </td>
-                <td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Creater.Email)
+                        </td>
+                        <td>
 
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                </td>
-            </tr>
-        }
-
-    </table>
-    @Html.PagedListPager(Model, Page => Url.Action("ViewIndex", new { boardKey = ViewBag.BoardKey, page = Page }))
-
-</div>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @Html.PagedListPager(Model, Page => Url.Action("ViewIndex", new { boardKey = ViewBag.BoardKey, page = Page }))
+    </div>
+    </div>
 

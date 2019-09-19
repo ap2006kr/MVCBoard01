@@ -14,6 +14,10 @@ namespace MVCBoard.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
+            if (User.Identity.IsAuthenticated == false)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             return View();
         }
 
