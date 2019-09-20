@@ -1,4 +1,5 @@
 ﻿@model MVCBoard.Models.RegisterViewModel
+@using reCAPTCHA.MVC
 @{
     ViewBag.Title = "등록";
     Layout = "~/Views/Shared/_Layout02.cshtml";
@@ -27,7 +28,8 @@
 
             </div>
 
-
+            @Html.Recaptcha()
+            @Html.ValidationMessage("ReCaptcha")
             <input type="submit" class="btn btn-primary btn-block" value="등록" />
 
 
@@ -38,7 +40,7 @@
         }
         <div class="text-center">
             <a class="d-block small mt-3" href="@Url.Action("Login", "Account" , null)">Login page</a>
-            <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+            <a class="d-block small" href="@Url.Action("ForgotPassword", "Account")">Forgot Password?</a>
         </div>
     </div>
 </div>

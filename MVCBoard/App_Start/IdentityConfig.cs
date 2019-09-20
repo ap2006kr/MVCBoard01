@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
+using System.Net.Configuration;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -19,8 +22,28 @@ namespace MVCBoard
         public Task SendAsync(IdentityMessage message)
         {
             // 전자 메일을 보낼 전자 메일 서비스를 여기에 플러그 인으로 추가합니다.
-            return Task.FromResult(0);
+          //  return Task.FromResult(0);
+
+
+            var smtp = new SmtpClient();
+            var mail = new MailMessage();
+            var smtpSection = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
+            string username = smtpSection.Network.UserName;
+
+            mail.IsBodyHtml = true;
+            mail.From = new MailAddress(username);
+            mail.To.Add(message.Destination);
+            mail.Subject = message.Subject;
+            mail.Body = message.Body;
+
+            smtp.Timeout = 1000;
+
+            var t = Task.Run(() => smtp.SendAsync(mail, null));
+
+            return t;
         }
+
+
     }
 
     public class SmsService : IIdentityMessageService

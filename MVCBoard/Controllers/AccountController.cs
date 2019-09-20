@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MVCBoard.Models;
+using reCAPTCHA.MVC;
 
 namespace MVCBoard.Controllers
 {
@@ -146,8 +147,9 @@ namespace MVCBoard.Controllers
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
+        [CaptchaValidator]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, bool captchaValid)
         {
             if (ModelState.IsValid)
             {
@@ -203,18 +205,18 @@ namespace MVCBoard.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
-                {
-                    // 사용자가 없거나 확인되지 않은 경우 표시하지 않음
-                    return View("ForgotPasswordConfirmation");
-                }
+                //if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                //{
+                //    // 사용자가 없거나 확인되지 않은 경우 표시하지 않음
+                //    return View("ForgotPasswordConfirmation");
+                //}
 
                 // 계정 확인 및 암호 재설정을 사용하도록 설정하는 방법에 대한 자세한 내용은 https://go.microsoft.com/fwlink/?LinkID=320771을 참조하세요.
                 // 이 링크를 통해 전자 메일 보내기
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "암호 재설정", "<a href=\"" + callbackUrl + "\">여기</a>를 클릭하여 암호를 재설정하십시오.");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
+                 await UserManager.SendEmailAsync(user.Id, "암호 재설정", "<a href=\"" + callbackUrl + "\">여기</a>를 클릭하여 암호를 재설정하십시오.");
+                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // 이 경우 오류가 발생한 것이므로 폼을 다시 표시하십시오.
